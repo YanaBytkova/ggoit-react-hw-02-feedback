@@ -1,69 +1,98 @@
 import { Component } from 'react';
-// import { Product } from 'components/Product/Product';
+import { Button } from 'components/Button/Button';
+import { Statistics } from 'components/Statistics/Statistics';
 // import Section from 'components/Section/Section';
 
 import css from './App.module.css';
-
-
+// const Button = ({ calcStatistic, label }) => (
+//       <button type="button" onClick={countTotalFeedback}>
+//         {label}
+//       </button>
+//     );
 export class App extends Component {
   state = {
     good: 0,
     neutral: 0,
-    bad: 0
+    bad: 0, 
+    total: 0,
+    positivePercentage: 0
   };
 
-  handleGood = () => {
+  // handleGood = () => {
 
-    this.setState({ good: this.state.good + 1 });
+  //   this.setState({ good: this.state.good + 1 });
     
-  };
-  handleNeutral = () => {
+  // };
+  // handleNeutral = () => {
 
     
-    this.setState({ neutral: this.state.neutral + 1 });
+  //   this.setState({ neutral: this.state.neutral + 1 });
     
-  };
-  handleBad = () => {
+  // };
+  // handleBad = () => {
 
-    this.setState({ bad: this.state.bad + 1 });
-  };
-  // handleDecrement = () => {
-  //   if (this.state.counterValue === 0) {
-  //     alert('Please, stop! Counter value is already decremented!');
-  //     return;
-  //   }
-
-  //   this.setState({ counterValue: this.state.counterValue - 1 });
+  //   this.setState({ bad: this.state.bad + 1 });
   // };
 
-  // handleDeleteProduct = productId => {
-  //   // "3"
-  //   // [{id: "1"}, {id: "2"}, {id: "3"}]
-  //   // [{id: "1"}, {id: "2"}]
-  //   this.setState({
-  //     products: this.state.products.filter(product => product.id !== productId),
-  //   });
-  // };
+  countTotalFeedback = evt => {
+    const count = evt.target.textContent;
+    if (count === 'Good') {
+      this.setState({
+        good: this.state.good + 1,
+        total: this.state.total + 1,
+        
+      });
+      // countPositiveFeedbackPercentage()
+    }
+    if (count === 'Neutral') {
+      this.setState({
+        neutral: this.state.neutral + 1,
+        total: this.state.total + 1
+      });
+    }
+    if (count === 'Bad') {
+
+      this.setState({
+        bad: this.state.bad + 1,
+        total: this.state.total + 1
+      });
+    }
+    
+  
+    // const positive = this.state.good;
+    // console.log("positive" , positive);
+    // this.setState({ positivePercentage: this.state.positivePercentage + positive });
+  }
+  
+  countPositiveFeedbackPercentage = () => {
+    const positive = this.state.good;
+    const total = this.state.total;
+    const positivePercentage = (positive / total) * 100;
+    console.log("positivePercentage" , positivePercentage)
+    this.setState({ positivePercentage: positivePercentage });
+  }
 
   render() {
-    // const sortedProducts = [...this.state.products].sort(
-    //   (a, b) => b.discount - a.discount
-    // );
     return (
       <div>
         
           <h1>Please leave feedback</h1>
           <div className={css.buttonContainer}> 
-            <button onClick={this.handleGood}>Good</button>
+            <Button onClick={this.handleGood} countTotalFeedback={this.countTotalFeedback}  label="Good" />
+            <Button onClick={this.handleNeutral} countTotalFeedback={this.countTotalFeedback} label="Neutral" />
+            <Button onClick={this.handleBad} countTotalFeedback={this.countTotalFeedback} label="Bad" />
+            {/* <button onClick={this.handleGood}>Good</button>
             <button onClick={this.handleNeutral}>Neutral</button>
-            <button onClick={this.handleBad}>Bad</button>
+            <button onClick={this.handleBad}>Bad</button> */}
           </div>
-         
+          {/* <Statistics good={} neutral={} bad={} total={} positivePercentage={}></Statistics> */}
           <h2>Statastics</h2>
           <div className={css.statistContainer}>
             <b>Good: {this.state.good}</b>
             <b>Neutral: {this.state.neutral}</b>
             <b>Bad: {this.state.bad}</b>
+            <b>Total: {this.state.total}</b>
+            <b>Positive Feadback: {this.state.positivePercentage}</b>
           </div>
           
           
