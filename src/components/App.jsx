@@ -78,7 +78,7 @@ export class App extends Component {
             
 
           </Section>
-          {this.state.total != 0 && (<Section title="Statistics">
+          {this.state.total !== 0 && (<Section title="Statistics">
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
