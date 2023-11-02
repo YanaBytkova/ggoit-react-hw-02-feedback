@@ -5,8 +5,6 @@ import { Notification } from 'components/Notification/Notification';
 import Section from 'components/Section/Section';
 
 
-import css from './App.module.css';
-
 export class App extends Component {
   state = {
     good: 0,
