@@ -11,3 +11,9 @@
     transform: scale(1.2);
     background: rgb(125, 125, 240);
 }
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
